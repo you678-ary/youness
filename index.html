@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Younes Cloud Pro</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
@@ -33,7 +33,17 @@
       margin-bottom: 20px;
     }
 
-    img {
+    .profile-img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #00e6e6;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+      margin-bottom: 20px;
+    }
+
+    .cloud-img {
       width: 300px;
       max-width: 90%;
       border-radius: 12px;
@@ -79,10 +89,15 @@
 </head>
 <body>
 
+  <!-- ✅ صورتك الشخصية -->
+  <img src="younes.png" alt="Younes Photo" class="profile-img">
+
   <h1>Youness Herraka is the Pro Tech Cloud ☁️</h1>
 
-  <img src="https://cdn.pixabay.com/photo/2016/03/09/09/17/cloud-1246612_1280.jpg" alt="Cloud Image">
+  <!-- ✅ صورة السحابة -->
+  <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cloud Image" class="cloud-img">
 
+  <!-- ✅ الشهادات -->
   <div class="certifications">
     <h2>💼 Certifications & Experiences</h2>
     <ul>
