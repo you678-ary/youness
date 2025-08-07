@@ -15,9 +15,17 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       text-align: center;
       padding: 20px;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
     }
 
     h1 {
@@ -33,9 +41,38 @@
       margin-bottom: 30px;
     }
 
+    .certifications {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 600px;
+      margin-top: 20px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    }
+
+    .certifications h2 {
+      margin-bottom: 10px;
+      font-size: 1.5em;
+      color: #00e6e6;
+    }
+
+    .certifications ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .certifications li {
+      margin: 10px 0;
+      font-size: 1.1em;
+    }
+
     @media (max-width: 600px) {
       h1 {
         font-size: 1.5em;
+      }
+
+      .certifications {
+        padding: 15px;
       }
     }
   </style>
@@ -45,6 +82,16 @@
   <h1>Youness Herraka is the Pro Tech Cloud ☁️</h1>
 
   <img src="https://cdn.pixabay.com/photo/2016/03/09/09/17/cloud-1246612_1280.jpg" alt="Cloud Image">
+
+  <div class="certifications">
+    <h2>💼 Certifications & Experiences</h2>
+    <ul>
+      <li>✅ Certified AWS Cloud Practitioner</li>
+      <li>✅ CCNA Networking & Security Basics</li>
+      <li>✅ Hands-on Projects with Proxmox & Kubernetes</li>
+      <li>✅ Internship in Cloud Infrastructure - CMC Souss Massa</li>
+    </ul>
+  </div>
 
 </body>
 </html>
