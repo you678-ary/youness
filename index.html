@@ -3,14 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Youness Herraka</title>
+  <title>Youness Herraka</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --clr-bg: #f5f7fa;
+      --clr-container-bg: #ffffff;
+      --clr-border: #e1e5eb;
+      --clr-primary: #1E88E5;    /* bleu acier */
+      --clr-accent: #26C6A0;     /* vert azur */
+      --clr-text-dark: #263238;
+      --clr-text-light: #546e7a;
+      --clr-table-head: #eceff1;
+      --clr-table-row: #f9fbfc;
+    }
+
     body {
       margin: 0;
       font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #f0f0f0;
+      background: var(--clr-bg);
+      color: var(--clr-text-dark);
       line-height: 1.8;
       padding: 20px;
     }
@@ -18,29 +30,29 @@
     .container {
       max-width: 900px;
       margin: 0 auto;
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--clr-container-bg);
       padding: 40px;
       border-radius: 16px;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
-      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border: 1px solid var(--clr-border);
       text-align: center;
     }
 
     h1 {
       font-size: 2.8em;
-      color: #00e6e6;
+      color: var(--clr-primary);
       margin-bottom: 10px;
     }
 
     p.title {
       font-size: 1.3em;
-      color: #cccccc;
+      color: var(--clr-text-light);
       margin-bottom: 40px;
     }
 
     h2 {
-      color: #00e6e6;
-      border-left: 5px solid #00e6e6;
+      color: var(--clr-primary);
+      border-left: 5px solid var(--clr-primary);
       padding-left: 10px;
       margin-top: 40px;
       text-align: left;
@@ -51,26 +63,28 @@
       border-collapse: collapse;
       margin-top: 20px;
       text-align: left;
-      transition: all 0.4s ease-in-out;
     }
 
-    .skills-table th, .skills-table td {
+    .skills-table th,
+    .skills-table td {
       padding: 12px;
-      border: 1px solid #334455;
+      border: 1px solid var(--clr-border);
     }
 
     .skills-table th {
-      background-color: #162530;
-      color: #00e6e6;
+      background-color: var(--clr-table-head);
+      color: var(--clr-text-dark);
     }
 
     .skills-table td {
-      background-color: #1c2a35;
+      background-color: var(--clr-table-row);
+      color: var(--clr-text-dark);
     }
 
     ul {
       padding-left: 20px;
       text-align: left;
+      color: var(--clr-text-dark);
     }
 
     ul li {
@@ -78,12 +92,11 @@
     }
 
     .contact-btn {
-      display: block;
-      width: fit-content;
+      display: inline-block;
       margin: 40px auto 0;
-      padding: 12px 24px;
-      background-color: #00e6e6;
-      color: #000;
+      padding: 14px 28px;
+      background-color: var(--clr-accent);
+      color: #fff;
       font-weight: bold;
       border: none;
       border-radius: 8px;
@@ -92,43 +105,46 @@
     }
 
     .contact-btn:hover {
-      background-color: #00bcbc;
+      background-color: #1aa78a;
     }
 
     .cloud-status {
-      background: rgba(0, 230, 230, 0.1);
+      background: #e3fdfd;
       padding: 20px;
       margin-top: 30px;
       border-radius: 12px;
       font-size: 1.1em;
-      box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.2);
+      color: var(--clr-text-dark);
+      border: 1px solid #b2f2f2;
     }
 
     .deploy-btn {
       margin-top: 20px;
       padding: 10px 20px;
-      background-color: #0ff;
-      color: #000;
+      background-color: var(--clr-primary);
+      color: #fff;
       font-weight: bold;
       border: none;
       border-radius: 6px;
       cursor: pointer;
+      transition: background 0.3s ease;
     }
 
     .deploy-btn:hover {
-      background-color: #00cccc;
+      background-color: #1565c0;
     }
 
     svg.cloud-icon {
       margin: 30px auto;
       display: block;
       width: 80px;
+      fill: var(--clr-primary);
       animation: float 3s ease-in-out infinite;
     }
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-8px); }
     }
 
     @media (max-width: 600px) {
@@ -149,10 +165,10 @@
 <body>
 
   <div class="container">
-    <h1>Youness Herraka</h1>
+    <h1>Youness Herraka</h1>
     <p class="title">Technicien Spécialisé ☁️</p>
 
-    <svg class="cloud-icon" fill="#00e6e6" viewBox="0 0 64 64">
+    <svg class="cloud-icon" viewBox="0 0 64 64">
       <path d="M48.6,27.3C47.4,20.5,41.4,15.5,34.5,15.5c-5.6,0-10.5,3.4-12.5,8.3c-0.7-0.2-1.4-0.3-2.1-0.3c-4.4,0-8,3.6-8,8
       s3.6,8,8,8h28c3.9,0,7-3.1,7-7S52.5,27.6,48.6,27.3z"/>
     </svg>
@@ -184,20 +200,20 @@
 
     <h2>💼 Expériences</h2>
     <ul>
-      <li><strong>Stage – CMC Souss Massa :</strong> Déploiement Proxmox, VMs Linux/Windows, réseaux virtuels, supervision interne.</li>
-      <li><strong>Mini-projets :</strong> Mini-cloud privé, Docker, GitHub Pages, scripts de déploiement automatisé.</li>
+      <li><strong>Stage – CMC Souss Massa :</strong> Déploiement Proxmox, VMs Linux/Windows, réseaux virtuels, supervision interne.</li>
+      <li><strong>Mini‑projets :</strong> Mini‑cloud privé, Docker, GitHub Pages, scripts de déploiement automatisé.</li>
     </ul>
 
     <h2>🎓 Formation</h2>
     <ul>
-      <li><strong>Baccalauréat Professionnel – Maintenance Informatique & Réseaux</strong><br>Lycée Technique Mohamed VI – Azilal</li>
-      <li><strong>Technicien Spécialisé – Cloud Computing</strong><br>CMC Souss Massa (OFPPT)</li>
+      <li><strong>Baccalauréat Professionnel – Maintenance Informatique & Réseaux</strong><br>Lycée Technique Mohamed VI – Azilal</li>
+      <li><strong>Technicien Spécialisé – Cloud Computing</strong><br>CMC Souss Massa (OFPPT)</li>
     </ul>
 
     <h2>🎯 Objectif professionnel</h2>
     <p>Intégrer une équipe DevOps ou Cloud pour participer au déploiement, à l’automatisation et à la sécurisation des infrastructures modernes.</p>
 
-    <a href="https://www.linkedin.com/in/youness-herraka-420889342/" target="_blank" class="contact-btn">💼 Me Contacter sur LinkedIn</a>
+    <a href="https://www.linkedin.com/in/youness-herraka-420889342/" target="_blank" class="contact-btn">💼 Me Contacter sur LinkedIn</a>
   </div>
 
   <script>
