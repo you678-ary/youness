@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title> Youness herraka>/title>
+  <title>Youness Herraka</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
     body {
@@ -51,6 +51,7 @@
       border-collapse: collapse;
       margin-top: 20px;
       text-align: left;
+      transition: all 0.4s ease-in-out;
     }
 
     .skills-table th, .skills-table td {
@@ -94,6 +95,42 @@
       background-color: #00bcbc;
     }
 
+    .cloud-status {
+      background: rgba(0, 230, 230, 0.1);
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 12px;
+      font-size: 1.1em;
+      box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.2);
+    }
+
+    .deploy-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #0ff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .deploy-btn:hover {
+      background-color: #00cccc;
+    }
+
+    svg.cloud-icon {
+      margin: 30px auto;
+      display: block;
+      width: 80px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
     @media (max-width: 600px) {
       .container {
         padding: 20px;
@@ -115,36 +152,26 @@
     <h1>Youness Herraka</h1>
     <p class="title">Technicien Spécialisé ☁️</p>
 
+    <svg class="cloud-icon" fill="#00e6e6" viewBox="0 0 64 64">
+      <path d="M48.6,27.3C47.4,20.5,41.4,15.5,34.5,15.5c-5.6,0-10.5,3.4-12.5,8.3c-0.7-0.2-1.4-0.3-2.1-0.3c-4.4,0-8,3.6-8,8
+      s3.6,8,8,8h28c3.9,0,7-3.1,7-7S52.5,27.6,48.6,27.3z"/>
+    </svg>
+
+    <div class="cloud-status" id="cloudStatus">
+      🌐 Cloud Status : <span id="statusText">Chargement...</span>
+    </div>
+
+    <button class="deploy-btn" onclick="simulateDeploy()">🚀 Simuler un déploiement Cloud</button>
+
     <h2>🧠 Compétences techniques</h2>
-    <table class="skills-table">
-      <tr>
-        <th>Compétence</th>
-        <th>Niveau</th>
-      </tr>
-      <tr>
-        <td>Déploiement Cloud (AWS, Azure)</td>
-        <td>Intermédiaire à avancé</td>
-      </tr>
-      <tr>
-        <td>Virtualisation (Proxmox, VMware)</td>
-        <td>Avancé</td>
-      </tr>
-      <tr>
-        <td>Containers (Docker, Kubernetes)</td>
-        <td>Intermédiaire</td>
-      </tr>
-      <tr>
-        <td>Sécurité cloud & réseaux</td>
-        <td>Bonne maîtrise</td>
-      </tr>
-      <tr>
-        <td>Infrastructure as Code (Ansible, Terraform)</td>
-        <td>En cours d’apprentissage</td>
-      </tr>
-      <tr>
-        <td>CI/CD, GitHub Actions</td>
-        <td>Notions pratiques, avec scripts en Python, Bash & PowerShell</td>
-      </tr>
+    <table class="skills-table" id="skillsTable">
+      <tr><th>Compétence</th><th>Niveau</th></tr>
+      <tr><td>Déploiement Cloud (AWS, Azure)</td><td>Intermédiaire à avancé</td></tr>
+      <tr><td>Virtualisation (Proxmox, VMware)</td><td>Avancé</td></tr>
+      <tr><td>Containers (Docker, Kubernetes)</td><td>Intermédiaire</td></tr>
+      <tr><td>Sécurité cloud & réseaux</td><td>Bonne maîtrise</td></tr>
+      <tr><td>Infrastructure as Code (Ansible, Terraform)</td><td>En cours d’apprentissage</td></tr>
+      <tr><td>CI/CD, GitHub Actions</td><td>Notions pratiques</td></tr>
     </table>
 
     <h2>📜 Certifications</h2>
@@ -163,15 +190,8 @@
 
     <h2>🎓 Formation</h2>
     <ul>
-      <li><strong>Baccalauréat Professionnel – Maintenance Informatique & Réseaux</strong><br>
-        Lycée Technique Mohamed VI – Azilal<br>
-        Diplôme lié aux programmes de formation professionnelle encadrés par l'OFPPT, avec compétences en câblage, installation, configuration, sécurité réseau, et maintenance informatique.
-      </li>
-
-      <li><strong>Technicien Spécialisé – Cloud Computing</strong><br>
-        CMC Souss Massa (OFPPT)<br>
-        Formation spécialisée dans le déploiement Cloud, la virtualisation, la sécurité des systèmes, IaC et pratiques DevOps modernes.
-      </li>
+      <li><strong>Baccalauréat Professionnel – Maintenance Informatique & Réseaux</strong><br>Lycée Technique Mohamed VI – Azilal</li>
+      <li><strong>Technicien Spécialisé – Cloud Computing</strong><br>CMC Souss Massa (OFPPT)</li>
     </ul>
 
     <h2>🎯 Objectif professionnel</h2>
@@ -179,6 +199,24 @@
 
     <a href="https://www.linkedin.com/in/youness-herraka-420889342/" target="_blank" class="contact-btn">💼 Me Contacter sur LinkedIn</a>
   </div>
+
+  <script>
+    const statusText = document.getElementById('statusText');
+    const statusStates = ['🌤️ Stable', '⛅ Latence modérée', '🌩️ En cours de déploiement...', '✅ Disponible'];
+    let i = 0;
+
+    setInterval(() => {
+      statusText.textContent = statusStates[i % statusStates.length];
+      i++;
+    }, 4000);
+
+    function simulateDeploy() {
+      statusText.textContent = '🚀 Déploiement simulé...';
+      setTimeout(() => {
+        statusText.textContent = '✅ Infrastructure déployée avec succès';
+      }, 3000);
+    }
+  </script>
 
 </body>
 </html>
