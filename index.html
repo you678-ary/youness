@@ -1,238 +1,378 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Youness Herraka</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --clr-bg: #f5f7fa;
-      --clr-container-bg: #ffffff;
-      --clr-border: #e1e5eb;
-      --clr-primary: #1E88E5;    /* bleu acier */
-      --clr-accent: #26C6A0;     /* vert azur */
-      --clr-text-dark: #263238;
-      --clr-text-light: #546e7a;
-      --clr-table-head: #eceff1;
-      --clr-table-row: #f9fbfc;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رسالة خاصة</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: var(--clr-bg);
-      color: var(--clr-text-dark);
-      line-height: 1.8;
-      padding: 20px;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      background: var(--clr-container-bg);
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      border: 1px solid var(--clr-border);
-      text-align: center;
-    }
+        /* Animated Background Stars */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
 
-    h1 {
-      font-size: 2.8em;
-      color: var(--clr-primary);
-      margin-bottom: 10px;
-    }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
 
-    p.title {
-      font-size: 1.3em;
-      color: var(--clr-text-light);
-      margin-bottom: 40px;
-    }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
 
-    h2 {
-      color: var(--clr-primary);
-      border-left: 5px solid var(--clr-primary);
-      padding-left: 10px;
-      margin-top: 40px;
-      text-align: left;
-    }
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
 
-    .skills-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      text-align: left;
-    }
+        /* Loading Animation */
+        .loader {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 40px;
+        }
 
-    .skills-table th,
-    .skills-table td {
-      padding: 12px;
-      border: 1px solid var(--clr-border);
-    }
+        .spinner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid transparent;
+            border-top-color: rgba(255, 255, 255, 0.8);
+            border-right-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        }
 
-    .skills-table th {
-      background-color: var(--clr-table-head);
-      color: var(--clr-text-dark);
-    }
+        .spinner:nth-child(2) {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            border-top-color: rgba(255, 182, 193, 0.9);
+            border-right-color: rgba(255, 182, 193, 0.5);
+            animation-duration: 1.5s;
+            animation-direction: reverse;
+        }
 
-    .skills-table td {
-      background-color: var(--clr-table-row);
-      color: var(--clr-text-dark);
-    }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-    ul {
-      padding-left: 20px;
-      text-align: left;
-      color: var(--clr-text-dark);
-    }
+        .center-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 35px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
 
-    ul li {
-      margin-bottom: 10px;
-    }
+        @keyframes heartbeat {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            25% { transform: translate(-50%, -50%) scale(1.1); }
+            50% { transform: translate(-50%, -50%) scale(1); }
+        }
 
-    .contact-btn {
-      display: inline-block;
-      margin: 40px auto 0;
-      padding: 14px 28px;
-      background-color: var(--clr-accent);
-      color: #fff;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
+        /* Loading Text */
+        .loading-text {
+            color: white;
+            font-size: 20px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in forwards;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
 
-    .contact-btn:hover {
-      background-color: #1aa78a;
-    }
+        .dots {
+            color: white;
+            font-size: 30px;
+            letter-spacing: 8px;
+        }
 
-    .cloud-status {
-      background: #e3fdfd;
-      padding: 20px;
-      margin-top: 30px;
-      border-radius: 12px;
-      font-size: 1.1em;
-      color: var(--clr-text-dark);
-      border: 1px solid #b2f2f2;
-    }
+        .dots span {
+            animation: blink 1.4s infinite;
+        }
 
-    .deploy-btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: var(--clr-primary);
-      color: #fff;
-      font-weight: bold;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
+        .dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
 
-    .deploy-btn:hover {
-      background-color: #1565c0;
-    }
+        .dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
 
-    svg.cloud-icon {
-      margin: 30px auto;
-      display: block;
-      width: 80px;
-      fill: var(--clr-primary);
-      animation: float 3s ease-in-out infinite;
-    }
+        @keyframes blink {
+            0%, 20%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
+        /* Message Container */
+        .message-container {
+            display: none;
+            animation: fadeInUp 1.2s ease-out forwards;
+        }
 
-    @media (max-width: 600px) {
-      .container {
-        padding: 20px;
-      }
+        .message-box {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 70px 50px;
+            border-radius: 40px;
+            box-shadow: 0 30px 90px rgba(238, 156, 167, 0.4),
+                        0 0 0 1px rgba(255, 255, 255, 0.5);
+            max-width: 650px;
+            margin: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
 
-      h1 {
-        font-size: 2em;
-      }
+        .message-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 182, 193, 0.15) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
 
-      .skills-table th, .skills-table td {
-        font-size: 14px;
-      }
-    }
-  </style>
+        .message-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .decorative-top {
+            font-size: 50px;
+            margin-bottom: 25px;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 5px 10px rgba(238, 156, 167, 0.3));
+        }
+
+        .message-text {
+            font-size: 36px;
+            color: #ee9ca7;
+            font-weight: 600;
+            line-height: 1.7;
+            text-shadow: 2px 2px 4px rgba(238, 156, 167, 0.1);
+            margin: 25px 0;
+        }
+
+        .decorative-bottom {
+            margin-top: 30px;
+            font-size: 28px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .decorative-bottom span {
+            display: inline-block;
+            margin: 0 8px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .decorative-bottom span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .decorative-bottom span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Floating Particles */
+        .particle {
+            position: absolute;
+            font-size: 18px;
+            opacity: 0.7;
+            pointer-events: none;
+            animation: floatUp 8s infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Corner Decorations */
+        .corner-decoration {
+            position: absolute;
+            font-size: 80px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .corner-decoration.top-left {
+            top: 20px;
+            left: 20px;
+            animation: rotate 30s linear infinite;
+        }
+
+        .corner-decoration.top-right {
+            top: 20px;
+            right: 20px;
+            animation: rotate 30s linear infinite reverse;
+        }
+
+        .corner-decoration.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            animation: rotate 25s linear infinite;
+        }
+
+        .corner-decoration.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            animation: rotate 25s linear infinite reverse;
+        }
+    </style>
 </head>
 <body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="corner-decoration top-left">✨</div>
+    <div class="corner-decoration top-right">💫</div>
+    <div class="corner-decoration bottom-left">🌸</div>
+    <div class="corner-decoration bottom-right">🌺</div>
 
-  <div class="container">
-    <h1>Youness Herraka</h1>
-    <p class="title">Technicien Spécialisé ☁️</p>
+    <div class="container">
+        <!-- Loading Screen -->
+        <div id="loadingScreen">
+            <div class="loader">
+                <div class="spinner"></div>
+                <div class="spinner"></div>
+                <div class="center-icon">💕</div>
+            </div>
+            <div class="loading-text">جاري التحضير</div>
+            <div class="dots">
+                <span>.</span><span>.</span><span>.</span>
+            </div>
+        </div>
 
-    <svg class="cloud-icon" viewBox="0 0 64 64">
-      <path d="M48.6,27.3C47.4,20.5,41.4,15.5,34.5,15.5c-5.6,0-10.5,3.4-12.5,8.3c-0.7-0.2-1.4-0.3-2.1-0.3c-4.4,0-8,3.6-8,8
-      s3.6,8,8,8h28c3.9,0,7-3.1,7-7S52.5,27.6,48.6,27.3z"/>
-    </svg>
-
-    <div class="cloud-status" id="cloudStatus">
-      🌐 Cloud Status : <span id="statusText">Chargement...</span>
+        <!-- Message Screen -->
+        <div id="messageScreen" class="message-container">
+            <div class="message-box">
+                <div class="message-content">
+                    <div class="decorative-top">
+                        🌹✨🌹
+                    </div>
+                    <div class="message-text">
+                        كنرتاح مع عينيك ا مريم كثر من نعاس
+                    </div>
+                    <div class="decorative-bottom">
+                        <span>💖</span>
+                        <span>🌟</span>
+                        <span>💖</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <button class="deploy-btn" onclick="simulateDeploy()">🚀 Simuler un déploiement Cloud</button>
+    <script>
+        // Create background stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
 
-    <h2>🧠 Compétences techniques</h2>
-    <table class="skills-table" id="skillsTable">
-      <tr><th>Compétence</th><th>Niveau</th></tr>
-      <tr><td>Déploiement Cloud (AWS, Azure)</td><td>Intermédiaire à avancé</td></tr>
-      <tr><td>Virtualisation (Proxmox, VMware)</td><td>Avancé</td></tr>
-      <tr><td>Containers (Docker, Kubernetes)</td><td>Intermédiaire</td></tr>
-      <tr><td>Sécurité cloud & réseaux</td><td>Bonne maîtrise</td></tr>
-      <tr><td>Infrastructure as Code (Ansible, Terraform)</td><td>En cours d’apprentissage</td></tr>
-      <tr><td>CI/CD, GitHub Actions</td><td>Notions pratiques</td></tr>
-    </table>
+        // Create floating particles
+        function createParticles() {
+            const particles = ['🌸', '🌺', '💕', '✨', '🌟', '💖', '🦋'];
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                document.body.appendChild(particle);
+            }
+        }
 
-    <h2>📜 Certifications</h2>
-    <ul>
-      <li>✅ AWS Certified Cloud Practitioner</li>
-      <li>✅ CCNA Networking & Security Basics</li>
-      <li>✅ Formation Docker & Kubernetes (Lab)</li>
-      <li>✅ Certificat Proxmox VE</li>
-    </ul>
+        // Initialize
+        createStars();
 
-    <h2>💼 Expériences</h2>
-    <ul>
-      <li><strong>Stage – CMC Souss Massa :</strong> Déploiement Proxmox, VMs Linux/Windows, réseaux virtuels, supervision interne.</li>
-      <li><strong>Mini‑projets :</strong> Mini‑cloud privé, Docker, GitHub Pages, scripts de déploiement automatisé.</li>
-    </ul>
-
-    <h2>🎓 Formation</h2>
-    <ul>
-      <li><strong>Baccalauréat Professionnel – Maintenance Informatique & Réseaux</strong><br>Lycée Technique Mohamed VI – Azilal</li>
-      <li><strong>Technicien Spécialisé – Cloud Computing</strong><br>CMC Souss Massa (OFPPT)</li>
-    </ul>
-
-    <h2>🎯 Objectif professionnel</h2>
-    <p>Intégrer une équipe DevOps ou Cloud pour participer au déploiement, à l’automatisation et à la sécurisation des infrastructures modernes.</p>
-
-    <a href="https://www.linkedin.com/in/youness-herraka-420889342/" target="_blank" class="contact-btn">💼 Me Contacter sur LinkedIn</a>
-  </div>
-
-  <script>
-    const statusText = document.getElementById('statusText');
-    const statusStates = ['🌤️ Stable', '⛅ Latence modérée', '🌩️ En cours de déploiement...', '✅ Disponible'];
-    let i = 0;
-
-    setInterval(() => {
-      statusText.textContent = statusStates[i % statusStates.length];
-      i++;
-    }, 4000);
-
-    function simulateDeploy() {
-      statusText.textContent = '🚀 Déploiement simulé...';
-      setTimeout(() => {
-        statusText.textContent = '✅ Infrastructure déployée avec succès';
-      }, 3000);
-    }
-  </script>
-
+        // Show message after loading
+        setTimeout(() => {
+            document.getElementById('loadingScreen').style.display = 'none';
+            document.getElementById('messageScreen').style.display = 'block';
+            createParticles();
+        }, 3500);
+    </script>
 </body>
 </html>
