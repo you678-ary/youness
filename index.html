@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+            background: #000000;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -22,24 +22,53 @@
             position: relative;
         }
 
-        /* Animated Background Stars */
-        .stars {
+        /* Animated Gradient Background */
+        body::before {
+            content: '';
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(240, 147, 251, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(245, 87, 108, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 182, 193, 0.1) 0%, transparent 50%);
+            animation: moveGradient 15s ease infinite;
         }
 
-        .star {
+        @keyframes moveGradient {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        /* Floating Bubbles */
+        .bubble {
             position: absolute;
-            background: white;
+            background: rgba(240, 147, 251, 0.1);
             border-radius: 50%;
-            animation: twinkle 3s infinite;
+            animation: rise 15s infinite ease-in;
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(245, 87, 108, 0.2);
         }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.5); }
+        @keyframes rise {
+            0% {
+                bottom: -100px;
+                opacity: 0;
+                transform: translateX(0) scale(0);
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                bottom: 110%;
+                opacity: 0;
+                transform: translateX(100px) scale(1);
+            }
         }
 
         .container {
@@ -51,72 +80,86 @@
         /* Loading Animation */
         .loader {
             position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 40px;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 50px;
         }
 
-        .spinner {
+        .ring {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 3px solid transparent;
-            border-top-color: rgba(255, 255, 255, 0.8);
-            border-right-color: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
-            animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            border: 3px solid transparent;
         }
 
-        .spinner:nth-child(2) {
-            width: 80%;
-            height: 80%;
-            top: 10%;
-            left: 10%;
+        .ring:nth-child(1) {
+            width: 140px;
+            height: 140px;
+            border-top-color: rgba(255, 255, 255, 0.9);
+            border-right-color: rgba(255, 255, 255, 0.3);
+            animation: rotate 1.5s linear infinite;
+        }
+
+        .ring:nth-child(2) {
+            width: 100px;
+            height: 100px;
+            top: 20px;
+            left: 20px;
             border-top-color: rgba(255, 182, 193, 0.9);
-            border-right-color: rgba(255, 182, 193, 0.5);
-            animation-duration: 1.5s;
-            animation-direction: reverse;
+            border-left-color: rgba(255, 182, 193, 0.3);
+            animation: rotate 2s linear infinite reverse;
         }
 
-        @keyframes spin {
+        .ring:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 40px;
+            left: 40px;
+            border-top-color: rgba(255, 255, 255, 0.7);
+            border-bottom-color: rgba(255, 255, 255, 0.3);
+            animation: rotate 1.2s linear infinite;
+        }
+
+        @keyframes rotate {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        .center-icon {
+        .loader-center {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 35px;
-            animation: heartbeat 1.5s ease-in-out infinite;
+            font-size: 32px;
+            animation: pulse 1.8s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
         }
 
-        @keyframes heartbeat {
+        @keyframes pulse {
             0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            25% { transform: translate(-50%, -50%) scale(1.1); }
-            50% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.15); }
         }
 
         /* Loading Text */
         .loading-text {
             color: white;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 300;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             opacity: 0;
-            animation: fadeIn 0.8s ease-in forwards;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.8s ease-in 0.3s forwards;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
         }
 
         .dots {
             color: white;
-            font-size: 30px;
-            letter-spacing: 8px;
+            font-size: 35px;
+            letter-spacing: 10px;
         }
 
         .dots span {
             animation: blink 1.4s infinite;
+            display: inline-block;
         }
 
         .dots span:nth-child(2) {
@@ -128,37 +171,39 @@
         }
 
         @keyframes blink {
-            0%, 20%, 100% { opacity: 0; }
-            50% { opacity: 1; }
+            0%, 20%, 100% { opacity: 0; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-5px); }
         }
 
         /* Message Container */
         .message-container {
             display: none;
-            animation: fadeInUp 1.2s ease-out forwards;
+            animation: zoomIn 1.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
 
         .message-box {
-            background: rgba(255, 255, 255, 0.98);
-            padding: 70px 50px;
-            border-radius: 40px;
-            box-shadow: 0 30px 90px rgba(238, 156, 167, 0.4),
-                        0 0 0 1px rgba(255, 255, 255, 0.5);
-            max-width: 650px;
+            background: linear-gradient(145deg, rgba(240, 147, 251, 0.15), rgba(245, 87, 108, 0.15));
+            padding: 80px 60px;
+            border-radius: 50px;
+            box-shadow: 
+                0 40px 100px rgba(245, 87, 108, 0.4),
+                0 0 0 1px rgba(240, 147, 251, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            max-width: 700px;
             margin: 0 20px;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
+        /* Animated border glow */
         .message-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 182, 193, 0.15) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
+            display: none;
+        }
+
+        @keyframes borderRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .message-content {
@@ -166,51 +211,75 @@
             z-index: 2;
         }
 
-        .decorative-top {
-            font-size: 50px;
-            margin-bottom: 25px;
-            animation: float 3s ease-in-out infinite;
-            filter: drop-shadow(0 5px 10px rgba(238, 156, 167, 0.3));
+        .top-decoration {
+            font-size: 55px;
+            margin-bottom: 30px;
+            animation: float 3.5s ease-in-out infinite;
+            filter: drop-shadow(0 8px 15px rgba(245, 87, 108, 0.3));
         }
 
         .message-text {
-            font-size: 36px;
-            color: #ee9ca7;
-            font-weight: 600;
-            line-height: 1.7;
-            text-shadow: 2px 2px 4px rgba(238, 156, 167, 0.1);
-            margin: 25px 0;
+            font-size: 38px;
+            color: #ffffff;
+            font-weight: 700;
+            line-height: 1.8;
+            text-shadow: 0 0 20px rgba(240, 147, 251, 0.6), 0 0 40px rgba(245, 87, 108, 0.4);
+            margin: 30px 0;
+            position: relative;
         }
 
-        .decorative-bottom {
-            margin-top: 30px;
-            font-size: 28px;
+        .bottom-decoration {
+            margin-top: 35px;
+            font-size: 32px;
             opacity: 0;
-            animation: fadeInUp 1s ease-out 0.5s forwards;
+            animation: fadeInUp 1.2s ease-out 0.6s forwards;
         }
 
-        .decorative-bottom span {
+        .bottom-decoration span {
             display: inline-block;
-            margin: 0 8px;
-            animation: bounce 2s ease-in-out infinite;
+            margin: 0 10px;
+            animation: bounce 2.5s ease-in-out infinite;
         }
 
-        .decorative-bottom span:nth-child(2) {
+        .bottom-decoration span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .bottom-decoration span:nth-child(2) {
             animation-delay: 0.2s;
         }
 
-        .decorative-bottom span:nth-child(3) {
+        .bottom-decoration span:nth-child(3) {
             animation-delay: 0.4s;
+        }
+
+        .bottom-decoration span:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        .bottom-decoration span:nth-child(5) {
+            animation-delay: 0.8s;
         }
 
         @keyframes fadeIn {
             to { opacity: 1; }
         }
 
+        @keyframes zoomIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
         @keyframes fadeInUp {
             0% {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             100% {
                 opacity: 1;
@@ -219,94 +288,40 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-18px) rotate(5deg); }
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-12px) scale(1.1); }
         }
 
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Floating Particles */
-        .particle {
+        /* Sparkles */
+        .sparkle {
             position: absolute;
-            font-size: 18px;
-            opacity: 0.7;
-            pointer-events: none;
-            animation: floatUp 8s infinite;
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.7;
-            }
-            90% {
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Corner Decorations */
-        .corner-decoration {
-            position: absolute;
-            font-size: 80px;
-            opacity: 0.1;
+            color: white;
+            font-size: 20px;
+            opacity: 0;
+            animation: sparkle 2s ease-in-out infinite;
             pointer-events: none;
         }
 
-        .corner-decoration.top-left {
-            top: 20px;
-            left: 20px;
-            animation: rotate 30s linear infinite;
-        }
-
-        .corner-decoration.top-right {
-            top: 20px;
-            right: 20px;
-            animation: rotate 30s linear infinite reverse;
-        }
-
-        .corner-decoration.bottom-left {
-            bottom: 20px;
-            left: 20px;
-            animation: rotate 25s linear infinite;
-        }
-
-        .corner-decoration.bottom-right {
-            bottom: 20px;
-            right: 20px;
-            animation: rotate 25s linear infinite reverse;
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1) rotate(180deg); }
         }
     </style>
 </head>
 <body>
-    <div class="stars" id="stars"></div>
-    
-    <div class="corner-decoration top-left">✨</div>
-    <div class="corner-decoration top-right">💫</div>
-    <div class="corner-decoration bottom-left">🌸</div>
-    <div class="corner-decoration bottom-right">🌺</div>
-
     <div class="container">
         <!-- Loading Screen -->
         <div id="loadingScreen">
             <div class="loader">
-                <div class="spinner"></div>
-                <div class="spinner"></div>
-                <div class="center-icon">💕</div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="loader-center">💕</div>
             </div>
             <div class="loading-text">جاري التحضير</div>
             <div class="dots">
@@ -318,16 +333,18 @@
         <div id="messageScreen" class="message-container">
             <div class="message-box">
                 <div class="message-content">
-                    <div class="decorative-top">
-                        🌹✨🌹
+                    <div class="top-decoration">
+                        🌹 ✨ 💖 ✨ 🌹
                     </div>
                     <div class="message-text">
                         كنرتاح مع عينيك ا مريم كثر من نعاس
                     </div>
-                    <div class="decorative-bottom">
-                        <span>💖</span>
+                    <div class="bottom-decoration">
+                        <span>💝</span>
                         <span>🌟</span>
-                        <span>💖</span>
+                        <span>💕</span>
+                        <span>🌟</span>
+                        <span>💝</span>
                     </div>
                 </div>
             </div>
@@ -335,43 +352,45 @@
     </div>
 
     <script>
-        // Create background stars
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 50; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.width = Math.random() * 3 + 1 + 'px';
-                star.style.height = star.style.width;
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                starsContainer.appendChild(star);
+        // Create bubbles
+        function createBubbles() {
+            for (let i = 0; i < 15; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const size = Math.random() * 100 + 50;
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.left = Math.random() * 100 + '%';
+                bubble.style.animationDelay = Math.random() * 15 + 's';
+                bubble.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                document.body.appendChild(bubble);
             }
         }
 
-        // Create floating particles
-        function createParticles() {
-            const particles = ['🌸', '🌺', '💕', '✨', '🌟', '💖', '🦋'];
-            for (let i = 0; i < 20; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.textContent = particles[Math.floor(Math.random() * particles.length)];
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 8 + 's';
-                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
-                document.body.appendChild(particle);
+        // Create sparkles around message
+        function createSparkles() {
+            const messageBox = document.querySelector('.message-box');
+            const sparkleEmojis = ['✨', '💫', '⭐', '🌟'];
+            
+            for (let i = 0; i < 12; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                messageBox.appendChild(sparkle);
             }
         }
 
         // Initialize
-        createStars();
+        createBubbles();
 
         // Show message after loading
         setTimeout(() => {
             document.getElementById('loadingScreen').style.display = 'none';
             document.getElementById('messageScreen').style.display = 'block';
-            createParticles();
+            createSparkles();
         }, 3500);
     </script>
 </body>
